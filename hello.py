@@ -1,2 +1,3 @@
 # First Python Application Author: Noel Presti
-print "Hello World from Python!"
+import os
+print "Hello World from %s !" % os.environ['NAME']
