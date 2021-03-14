@@ -1,11 +1,19 @@
-FROM ubuntu
+FROM ubuntu:16.04
 
-RUN apt-get update
-RUN apt-get install -y python python3-pip
-
-RUN pip3 install flask
+RUN apt-get update -y && \
+    apt-get install -y python-pip python-dev
 
 
-COPY . /opt/
+#We copy just the requirements.txt first to leverage Docker cache
+COPY ./requirements.txt /app/requirements.txt
 
-ENTRYPOINT FLASK_APP=/opt/app.py flask run
+WORKDIR /app
+
+RUN pip install -r requirements.txt
+
+
+COPY . /app
+
+ENTRYPOINT ["python"]
+
+CMD ["app.py"]
