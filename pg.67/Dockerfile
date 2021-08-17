@@ -5,6 +5,7 @@ RUN apt-get update -y && \
     pip install --upgrade setuptools && \
     pip install --upgrade pip
 
+##This is a test
 
 #We copy just the requirements.txt first to leverage Docker cache
 COPY ./requirements.txt /app/requirements.txt
