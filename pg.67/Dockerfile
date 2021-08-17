@@ -1,17 +1,10 @@
-FROM ubuntu:16.04
+FROM library/python:3.6-stretch
 
-RUN apt-get update -y && \
-    apt-get install -y python-pip python-dev apt-utils && \
-    pip install --upgrade pip
-
-
-#We copy just the requirements.txt first to leverage Docker cache
-COPY ./requirements.txt /app/requirements.txt
+COPY requirements.txt /
+RUN pip install -r /requirements.txt
+##This is a test
 
 WORKDIR /app
-
-RUN pip install -r requirements.txt
-
 
 COPY . /app
 
